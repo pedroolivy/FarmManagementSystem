@@ -8,8 +8,8 @@ namespace FarmManagementSystem.Domain.Entities
         public int UserId { get; set; }
         public string Name { get; set; }
         public Location Location { get; set; }
-        public List<Crop>? Crops { get; set; }
-        public List<Animal>? Animals { get; set; }
-        public List<Employee>? Employees { get; set; }
+        public ICollection<Crop>? Crops { get; set; }
+        public ICollection<Animal>? Animals { get; set; }
+        public ICollection<Employee>? Employees { get; set; }
     }
 }
