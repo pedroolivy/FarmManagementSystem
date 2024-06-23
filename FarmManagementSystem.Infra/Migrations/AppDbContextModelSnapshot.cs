@@ -134,6 +134,8 @@ namespace FarmManagementSystem.Infra.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Farm");
                 });
 
@@ -162,40 +164,88 @@ namespace FarmManagementSystem.Infra.Migrations
                     b.ToTable("Location");
                 });
 
+            modelBuilder.Entity("FarmManagementSystem.Domain.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PassWord")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
+                });
+
             modelBuilder.Entity("FarmManagementSystem.Domain.Entities.Animal", b =>
                 {
-                    b.HasOne("FarmManagementSystem.Domain.Entities.Farm", null)
+                    b.HasOne("FarmManagementSystem.Domain.Entities.Farm", "Farm")
                         .WithMany("Animals")
                         .HasForeignKey("FarmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Farm");
                 });
 
             modelBuilder.Entity("FarmManagementSystem.Domain.Entities.Crop", b =>
                 {
-                    b.HasOne("FarmManagementSystem.Domain.Entities.Farm", null)
+                    b.HasOne("FarmManagementSystem.Domain.Entities.Farm", "Farm")
                         .WithMany("Crops")
                         .HasForeignKey("FarmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Farm");
                 });
 
             modelBuilder.Entity("FarmManagementSystem.Domain.Entities.Employee", b =>
                 {
-                    b.HasOne("FarmManagementSystem.Domain.Entities.Farm", null)
+                    b.HasOne("FarmManagementSystem.Domain.Entities.Farm", "Farm")
                         .WithMany("Employees")
                         .HasForeignKey("FarmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Farm");
+                });
+
+            modelBuilder.Entity("FarmManagementSystem.Domain.Entities.Farm", b =>
+                {
+                    b.HasOne("FarmManagementSystem.Domain.Entities.User", "User")
+                        .WithMany("Farms")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("FarmManagementSystem.Domain.Entities.Location", b =>
                 {
-                    b.HasOne("FarmManagementSystem.Domain.Entities.Farm", null)
+                    b.HasOne("FarmManagementSystem.Domain.Entities.Farm", "Farm")
                         .WithOne("Location")
                         .HasForeignKey("FarmManagementSystem.Domain.Entities.Location", "FarmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Farm");
                 });
 
             modelBuilder.Entity("FarmManagementSystem.Domain.Entities.Farm", b =>
@@ -208,6 +258,11 @@ namespace FarmManagementSystem.Infra.Migrations
 
                     b.Navigation("Location")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FarmManagementSystem.Domain.Entities.User", b =>
+                {
+                    b.Navigation("Farms");
                 });
 #pragma warning restore 612, 618
         }

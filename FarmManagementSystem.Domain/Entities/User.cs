@@ -9,6 +9,6 @@ namespace FarmManagementSystem.Domain.Entities
         public string Email { get; set; }
         public string PassWord { get; set; }
         public string Position { get; set; }
-        public List<Farm>? Farms { get; set; }
+        public ICollection<Farm>? Farms { get; set; }
     }
 }
