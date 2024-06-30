@@ -1,6 +1,7 @@
 ﻿using FarmManagementSystem.Domain.Entities;
 using FarmManagementSystem.Domain.Interfaces;
 using FarmManagementSystem.Infra.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace FarmManagementSystem.Infra.Repositorios
 {
@@ -14,12 +15,17 @@ namespace FarmManagementSystem.Infra.Repositorios
 
         public ICollection<User> GetAll()
         {
-            return _appDbContext.User.ToList();
+            return _appDbContext.User
+                .AsNoTracking()
+                .ToList();
         }
 
         public User GetById(int Id)
         {
-            return _appDbContext.User.FirstOrDefault(x => x.Id == Id);
+            return _appDbContext
+                .User
+                .AsNoTracking()
+                .First(x => x.Id == Id);
         }
 
         public void Add(User user)
@@ -28,15 +34,19 @@ namespace FarmManagementSystem.Infra.Repositorios
             _appDbContext.SaveChanges();
         }
 
-        public void Update(User user)
+        public void Update(User userInDb, User user)
         {
-            _appDbContext.Update(user);
+            _appDbContext
+                .Attach(userInDb)
+                .CurrentValues
+                .SetValues(user);
+
             _appDbContext.SaveChanges();
         }
 
-        public void Delete(int user)
+        public void Delete(int id)
         {
-            _appDbContext.Remove(user);
+            _appDbContext.Remove(id);
             _appDbContext.SaveChanges();
         }
     }

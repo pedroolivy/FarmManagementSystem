@@ -1,6 +1,7 @@
 using FarmManagementSystem.Domain.Interfaces;
 using FarmManagementSystem.Infra.Data;
 using FarmManagementSystem.Infra.Repositorios;
+using FarmManagementSystem.Services.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,7 @@ builder.Services.AddScoped<IAnimalRepository, AnimalRepository>();
 builder.Services.AddScoped<IEmployeeRpository, EmployeeRpository>();
 builder.Services.AddScoped<ILocationRepository, LocationRepository>();
 
+builder.Services.AddScoped<UserService>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {

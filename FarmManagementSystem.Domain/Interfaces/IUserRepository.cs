@@ -7,7 +7,7 @@ namespace FarmManagementSystem.Domain.Interfaces
         ICollection<User> GetAll();
         User GetById(int Id);
         void Add(User user);
-        void Update(User user);
+        void Update(User userInDb, User user);
         void Delete(int id);
     }
 }

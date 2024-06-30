@@ -18,10 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FarmManagementSystem.Domain\FarmManagementSystem.Domain.csproj" />
     <ProjectReference Include="..\FarmManagementSystem.Infra\FarmManagementSystem.Infra.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\FarmManagementSystem.Services\FarmManagementSystem.Services.csproj" />
   </ItemGroup>
 
 </Project>
