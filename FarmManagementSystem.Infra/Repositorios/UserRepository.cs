@@ -13,7 +13,7 @@ namespace FarmManagementSystem.Infra.Repositorios
             _appDbContext = appDbContext;
         }
 
-        public ICollection<User> GetAll()
+        public List<User> GetAll()
         {
             return _appDbContext.User
                 .AsNoTracking()

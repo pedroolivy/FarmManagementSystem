@@ -3,68 +3,69 @@ using FarmManagementSystem.Domain.Interfaces;
 
 namespace FarmManagementSystem.Services.Services
 {
-    public class UserService(IUserRepository userRepository)
+    public class FarmService(IFarmRepository farmRepository)
     {
-        private readonly IUserRepository _userRepository = userRepository;
+        private readonly IFarmRepository _farmRepository = farmRepository;
 
-        public List<User> GetAll()
+        public List<Farm> GetAll()
         {
             try
             {
-                return _userRepository.GetAll();
+                return _farmRepository.GetAll();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            
+
         }
 
-        public User GetById(int Id)
+        public Farm GetById(int Id)
         {
             try
             {
-                return _userRepository.GetById(Id);
+                return _farmRepository.GetById(Id);
             }
             catch (Exception)
             {
-                throw new Exception("Usuário não encontrado");
+                throw new Exception("Fazenda não encontrada");
             }
         }
 
-        public void Add(User user)
+        public void Add(Farm user)
         {
 
             try
             {
-                _userRepository.Add(user);
+                _farmRepository.Add(user);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            
+
         }
 
-        public void Update(User user)
+        public void Update(Farm farm)
         {
             try
             {
-                var userInDb = _userRepository.GetById(user.Id);
-                _userRepository.Update(userInDb, user);
+                var farmInDb = _farmRepository.GetById(farm.Id);
+                _farmRepository.Update(farmInDb, farm);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            
+
         }
+
         public void Delete(int id)
         {
             try
             {
-                var userInDb = _userRepository.GetById(id);
-                _userRepository.Delete(userInDb);
+                var farmInDb = _farmRepository.GetById(id);
+                _farmRepository.Delete(farmInDb);
             }
             catch (Exception ex)
             {

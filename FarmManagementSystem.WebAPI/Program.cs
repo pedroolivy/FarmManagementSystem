@@ -17,6 +17,7 @@ builder.Services.AddScoped<ICropRepository, CropRepository>();
 builder.Services.AddScoped<IAnimalRepository, AnimalRepository>();
 builder.Services.AddScoped<IEmployeeRpository, EmployeeRpository>();
 builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+builder.Services.AddScoped<IFarmRepository, FarmRepository>();
 
 builder.Services.AddScoped<UserService>();
 
