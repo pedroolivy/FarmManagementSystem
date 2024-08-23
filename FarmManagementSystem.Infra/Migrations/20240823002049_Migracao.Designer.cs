@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FarmManagementSystem.Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240623194429_PrimeiraMigracao")]
-    partial class PrimeiraMigracao
+    [Migration("20240823002049_Migracao")]
+    partial class Migracao
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -128,6 +128,10 @@ namespace FarmManagementSystem.Infra.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -198,57 +202,47 @@ namespace FarmManagementSystem.Infra.Migrations
 
             modelBuilder.Entity("FarmManagementSystem.Domain.Entities.Animal", b =>
                 {
-                    b.HasOne("FarmManagementSystem.Domain.Entities.Farm", "Farm")
+                    b.HasOne("FarmManagementSystem.Domain.Entities.Farm", null)
                         .WithMany("Animals")
                         .HasForeignKey("FarmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Farm");
                 });
 
             modelBuilder.Entity("FarmManagementSystem.Domain.Entities.Crop", b =>
                 {
-                    b.HasOne("FarmManagementSystem.Domain.Entities.Farm", "Farm")
+                    b.HasOne("FarmManagementSystem.Domain.Entities.Farm", null)
                         .WithMany("Crops")
                         .HasForeignKey("FarmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Farm");
                 });
 
             modelBuilder.Entity("FarmManagementSystem.Domain.Entities.Employee", b =>
                 {
-                    b.HasOne("FarmManagementSystem.Domain.Entities.Farm", "Farm")
+                    b.HasOne("FarmManagementSystem.Domain.Entities.Farm", null)
                         .WithMany("Employees")
                         .HasForeignKey("FarmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Farm");
                 });
 
             modelBuilder.Entity("FarmManagementSystem.Domain.Entities.Farm", b =>
                 {
-                    b.HasOne("FarmManagementSystem.Domain.Entities.User", "User")
+                    b.HasOne("FarmManagementSystem.Domain.Entities.User", null)
                         .WithMany("Farms")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("FarmManagementSystem.Domain.Entities.Location", b =>
                 {
-                    b.HasOne("FarmManagementSystem.Domain.Entities.Farm", "Farm")
+                    b.HasOne("FarmManagementSystem.Domain.Entities.Farm", null)
                         .WithOne("Location")
                         .HasForeignKey("FarmManagementSystem.Domain.Entities.Location", "FarmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Farm");
                 });
 
             modelBuilder.Entity("FarmManagementSystem.Domain.Entities.Farm", b =>
@@ -259,8 +253,7 @@ namespace FarmManagementSystem.Infra.Migrations
 
                     b.Navigation("Employees");
 
-                    b.Navigation("Location")
-                        .IsRequired();
+                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("FarmManagementSystem.Domain.Entities.User", b =>

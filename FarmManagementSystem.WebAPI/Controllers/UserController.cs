@@ -23,28 +23,28 @@ namespace FarmManagementSystem.WebAPI.Controllers
         }
 
         [HttpGet("user/{Id}")]
-        public OkObjectResult GetById([FromRoute]int Id)
+        public OkObjectResult GetById(int Id)
         {
             var user = _userService.GetById(Id);
             return Ok(user);
         }
 
         [HttpPost("user")]
-        public CreatedResult Add([FromBody] User user)
+        public CreatedResult Add([FromBody]User user)
         {
             _userService.Add(user);
             return Created();
         }
 
-        [HttpPatch("userUpdate/{id}")]
-        public OkResult Update([FromRoute] int id, User user)
+        [HttpPut("userUpdate")]
+        public OkResult Update([FromBody] User user)
         {
-            _userService.Update(id, user);
+            _userService.Update(user);
             return Ok();
         }
 
         [HttpDelete("usuario/{id}")]
-        public OkResult Delete([FromRoute] int id)
+        public OkResult Delete(int id)
         {
             _userService.Delete(id);
             return Ok();

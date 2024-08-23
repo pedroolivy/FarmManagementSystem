@@ -44,9 +44,9 @@ namespace FarmManagementSystem.Infra.Repositorios
             _appDbContext.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Delete(User user)
         {
-            _appDbContext.Remove(id);
+            _appDbContext.Remove(user);
             _appDbContext.SaveChanges();
         }
     }

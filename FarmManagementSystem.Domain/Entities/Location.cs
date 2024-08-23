@@ -6,6 +6,5 @@
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public int FarmId { get; set; }
-        public required Farm Farm { get; set; }
     }
 }

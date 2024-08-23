@@ -1,16 +1,20 @@
-﻿using FarmManagementSystem.Domain.Interfaces;
+﻿using System.Text.Json.Serialization;
 
 namespace FarmManagementSystem.Domain.Entities
 {
-    public class Farm : IEntity
+    public class Farm
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public Location Location { get; set; }
-        public ICollection<Crop>? Crops { get; set; }
-        public ICollection<Animal>? Animals { get; set; }
-        public ICollection<Employee>? Employees { get; set; }
-        public required User User { get; set; }
         public int UserId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        [JsonIgnore]
+        public Location? Location { get; set; }
+        [JsonIgnore]
+        public List<Crop>? Crops { get; set; }
+        [JsonIgnore]
+        public List<Animal>? Animals { get; set; }
+        [JsonIgnore]
+        public List<Employee>? Employees { get; set; }
     }
-}
+}   

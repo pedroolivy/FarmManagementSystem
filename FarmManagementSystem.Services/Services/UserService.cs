@@ -46,11 +46,11 @@ namespace FarmManagementSystem.Services.Services
             
         }
 
-        public void Update(int id, User user)
+        public void Update(User user)
         {
             try
             {
-                var userInDb = _userRepository.GetById(id);
+                var userInDb = _userRepository.GetById(user.Id);
                 _userRepository.Update(userInDb, user);
             }
             catch (Exception ex)
@@ -64,7 +64,7 @@ namespace FarmManagementSystem.Services.Services
             try
             {
                 var userInDb = _userRepository.GetById(id);
-                _userRepository.Delete(userInDb.Id);
+                _userRepository.Delete(userInDb);
             }
             catch (Exception ex)
             {

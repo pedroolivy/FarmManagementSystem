@@ -1,9 +1,8 @@
 ﻿using FarmManagementSystem.Domain.Enums;
-using FarmManagementSystem.Domain.Interfaces;
 
 namespace FarmManagementSystem.Domain.Entities
 {
-    public class Animal : IEntity
+    public class Animal
     {
         public int Id { get; set; }
         public string Species { get; set; }
@@ -11,6 +10,5 @@ namespace FarmManagementSystem.Domain.Entities
         public int Age { get; set; }
         public AnimalType Type { get; set; }
         public int FarmId { get; set; }
-        public required Farm Farm { get; set; }
     }
 }
