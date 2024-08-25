@@ -11,7 +11,7 @@ namespace FarmManagementSystem.Infra.Repositorios
         {
             _appDbContext = appDbContext;
         }
-        public ICollection<Location> GetAll()
+        public List<Location> GetAll()
         {
             return _appDbContext.Location.ToList();
         }
@@ -21,7 +21,7 @@ namespace FarmManagementSystem.Infra.Repositorios
             return _appDbContext.Location.FirstOrDefault(x => x.Id == Id);
         }
 
-        public ICollection<Location> GetByFarmId(int farmId)
+        public List<Location> GetByFarmId(int farmId)
         {
             return _appDbContext.Location.Where(x => x.FarmId == farmId).ToList();
         }
@@ -31,15 +31,17 @@ namespace FarmManagementSystem.Infra.Repositorios
             _appDbContext.Add(location);
             _appDbContext.SaveChanges();
         }
-        public void Update(Location location)
+        public void Update(Location locationInDb, Location location)
         {
-            _appDbContext.Update(location);
-            _appDbContext.SaveChanges();
+            _appDbContext
+                .Attach(locationInDb)
+                .CurrentValues
+                .SetValues(location);
         }
 
-        public void Delete(int Id)
+        public void Delete(Location location)
         {
-            _appDbContext.Remove(Id);
+            _appDbContext.Remove(location);
             _appDbContext.SaveChanges();
         }
     }

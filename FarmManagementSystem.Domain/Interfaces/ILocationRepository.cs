@@ -4,11 +4,11 @@ namespace FarmManagementSystem.Domain.Interfaces
 {
     public interface ILocationRepository
     {
-        ICollection<Location> GetAll();
+        List<Location> GetAll();
         Location GetById(int Id);
-        ICollection<Location> GetByFarmId(int farmId);
+        List<Location> GetByFarmId(int farmId);
         void Add(Location location);
-        void Update(Location location);
-        void Delete(int Id);
+        void Update(Location locationInDb, Location location);
+        void Delete(Location location);
     }
 }
