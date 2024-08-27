@@ -1,5 +1,6 @@
 ﻿using FarmManagementSystem.Domain.Entities;
 using FarmManagementSystem.Domain.Interfaces;
+using FarmManagementSystem.Services.Dtos;
 
 namespace FarmManagementSystem.Services.Services
 {
@@ -32,11 +33,21 @@ namespace FarmManagementSystem.Services.Services
             }
         }
 
-        public void Add(User user)
+        public void Add(UserDto userDto)
         {
             try
             {
-                _userRepository.Add(user);
+                var usuario = new User
+                {
+                    Id = userDto.Id,
+                    UserName = userDto.UserName,
+                    Email = userDto.Email,
+                    PassWord = userDto.PassWord,
+                    Position = userDto.Position
+                };
+
+                usuario.Validate();
+                _userRepository.Add(usuario);
             }
             catch (Exception ex)
             {

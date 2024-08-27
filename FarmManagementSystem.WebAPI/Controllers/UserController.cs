@@ -1,4 +1,5 @@
 ﻿using FarmManagementSystem.Domain.Entities;
+using FarmManagementSystem.Services.Dtos;
 using FarmManagementSystem.Services.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,7 +31,7 @@ namespace FarmManagementSystem.WebAPI.Controllers
         }
 
         [HttpPost("user")]
-        public CreatedResult Add([FromBody]User user)
+        public CreatedResult Add([FromBody] UserDto user)
         {
             _userService.Add(user);
             return Created();

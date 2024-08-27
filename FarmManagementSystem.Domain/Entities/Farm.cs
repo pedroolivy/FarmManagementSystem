@@ -1,20 +1,28 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace FarmManagementSystem.Domain.Entities
 {
     public class Farm
     {
+        private const int Empty = 0;
+
         public int Id { get; set; }
         public int UserId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        [JsonIgnore]
         public Location? Location { get; set; }
-        [JsonIgnore]
         public List<Crop>? Crops { get; set; }
-        [JsonIgnore]
         public List<Animal>? Animals { get; set; }
-        [JsonIgnore]
         public List<Employee>? Employees { get; set; }
+
+        public void Validate()
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+                throw new ValidationException("O nome da fazenda é obrigatório.");
+
+            if (UserId < Empty)
+                throw new ValidationException("Um usuário válido deve estar associado à fazenda.");
+        }
     }
 }   
