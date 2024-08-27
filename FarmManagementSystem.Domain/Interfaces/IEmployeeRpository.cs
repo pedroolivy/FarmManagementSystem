@@ -4,11 +4,11 @@ namespace FarmManagementSystem.Domain.Interfaces
 {
     public interface IEmployeeRpository
     {
-        ICollection<Employee> GetAll();
+        List<Employee> GetAll();
         Employee GetById(int Id);
-        ICollection<Employee> GetByFarmId(int farmId);
+        List<Employee> GetByFarmId(int farmId);
         void Add(Employee employee);
-        void Update(Employee employee);
-        void Delete(int Id);
+        void Update(Employee employeeInDb, Employee employee);
+        void Delete(Employee employeeInDb);
     }
 }

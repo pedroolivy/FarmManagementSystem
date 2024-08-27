@@ -18,15 +18,22 @@ namespace FarmManagementSystem.WebAPI.Controllers
         [HttpGet("locations")]
         public OkObjectResult GetAll()
         {
-            var users = _locationService.GetAll();
-            return Ok(users);
+            var locations = _locationService.GetAll();
+            return Ok(locations);
         }
 
         [HttpGet("location/{Id}")]
         public OkObjectResult GetById(int Id)
         {
-            var user = _locationService.GetById(Id);
-            return Ok(user);
+            var location = _locationService.GetById(Id);
+            return Ok(location);
+        }
+
+        [HttpGet("locationByfarmId/{Id}")]
+        public OkObjectResult GetByFarmId(int Id)
+        {
+            var locations = _locationService.GetByFarmId(Id);
+            return Ok(locations);
         }
 
         [HttpPost("location")]

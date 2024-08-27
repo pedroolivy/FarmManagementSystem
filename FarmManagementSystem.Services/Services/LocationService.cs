@@ -35,9 +35,20 @@ namespace FarmManagementSystem.Services.Services
             }
         }
 
+        public List<Location> GetByFarmId(int faramId)
+        {
+            try
+            {
+                return _locationRepository.GetByFarmId(faramId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void Add(Location location)
         {
-
             try
             {
                 _locationRepository.Add(location);
@@ -46,7 +57,6 @@ namespace FarmManagementSystem.Services.Services
             {
                 throw new Exception(ex.Message);
             }
-
         }
 
         public void Update(Location location)
@@ -60,7 +70,6 @@ namespace FarmManagementSystem.Services.Services
             {
                 throw new Exception(ex.Message);
             }
-
         }
 
         public void Delete(int id)

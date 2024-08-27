@@ -4,11 +4,11 @@ namespace FarmManagementSystem.Domain.Interfaces
 {
     public interface IAnimalRepository
     {
-        ICollection<Animal> GetAll();
+        List<Animal> GetAll();
         Animal GetById(int id);
-        ICollection<Animal> GetByFarmId(int farmId);
+        List<Animal> GetByFarmId(int farmId);
         void Add(Animal animal);
-        void Update(Animal animal);
-        void Delete(int Id);
+        void Update(Animal animalInDb, Animal animal);
+        void Delete(Animal animal);
     }
 }

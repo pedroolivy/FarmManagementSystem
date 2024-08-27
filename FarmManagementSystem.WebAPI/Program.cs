@@ -5,7 +5,7 @@ using FarmManagementSystem.Services.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var stringConnetion = "DefaultConnection";
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -17,13 +17,17 @@ builder.Services.AddScoped<ICropRepository, CropRepository>();
 builder.Services.AddScoped<IAnimalRepository, AnimalRepository>();
 builder.Services.AddScoped<IEmployeeRpository, EmployeeRpository>();
 builder.Services.AddScoped<ILocationRepository, LocationRepository>();
-builder.Services.AddScoped<IFarmRepository, FarmRepository>();
 
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<FarmService>();
+builder.Services.AddScoped<CropService>();
+builder.Services.AddScoped<AnimalService>();
+builder.Services.AddScoped<EmployeeService>();
+builder.Services.AddScoped<LocationService>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString(stringConnetion));
 });
 
 var app = builder.Build();

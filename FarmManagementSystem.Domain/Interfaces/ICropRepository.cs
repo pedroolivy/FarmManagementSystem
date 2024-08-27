@@ -4,11 +4,11 @@ namespace FarmManagementSystem.Domain.Interfaces
 {
     public interface ICropRepository
     {
-        ICollection<Crop> GetAll();
+        List<Crop> GetAll();
         Crop GetById(int Id);
-        ICollection<Crop> GetByFarmId(int farmId);
+        List<Crop> GetByFarmId(int farmId);
         void Add(Crop crop);
-        void Update(Crop crop);
-        void Delete(int Id);
+        void Update(Crop cropInDb, Crop crop);
+        void Delete(Crop crop);
     }
 }

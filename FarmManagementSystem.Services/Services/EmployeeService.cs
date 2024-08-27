@@ -3,15 +3,15 @@ using FarmManagementSystem.Domain.Interfaces;
 
 namespace FarmManagementSystem.Services.Services
 {
-    public class FarmService(IFarmRepository farmRepository)
+    public class EmployeeService(IEmployeeRpository employeeRpository)
     {
-        private readonly IFarmRepository _farmRepository = farmRepository;
+        private readonly IEmployeeRpository _employeeRpository = employeeRpository;
 
-        public List<Farm> GetAll()
+        public List<Employee> GetAll()
         {
             try
             {
-                return _farmRepository.GetAll();
+                return _employeeRpository.GetAll();
             }
             catch (Exception ex)
             {
@@ -20,23 +20,23 @@ namespace FarmManagementSystem.Services.Services
 
         }
 
-        public Farm GetById(int Id)
+        public Employee GetById(int Id)
         {
             try
             {
-                return _farmRepository.GetById(Id);
+                return _employeeRpository.GetById(Id);
             }
             catch (Exception)
             {
-                throw new Exception("Fazenda não encontrada");
+                throw new Exception("Funcionário não encontrado");
             }
         }
 
-        public List<Farm> GetByUserId(int userId)
+        public List<Employee> GetByFarmId(int farmId)
         {
-            try
+            try 
             {
-                return _farmRepository.GetByUserId(userId);
+                return _employeeRpository.GetByFarmId(farmId);
             }
             catch (Exception ex)
             {
@@ -44,11 +44,11 @@ namespace FarmManagementSystem.Services.Services
             }
         }
 
-        public void Add(Farm user)
+        public void Add(Employee Employee)
         {
             try
             {
-                _farmRepository.Add(user);
+                _employeeRpository.Add(Employee);
             }
             catch (Exception ex)
             {
@@ -56,26 +56,25 @@ namespace FarmManagementSystem.Services.Services
             }
         }
 
-        public void Update(Farm farm)
+        public void Update(Employee employee)
         {
             try
             {
-                var farmInDb = _farmRepository.GetById(farm.Id);
-                _farmRepository.Update(farmInDb, farm);
+                var employeeInDb = _employeeRpository.GetById(employee.Id);
+                _employeeRpository.Update(employeeInDb, employee);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-
         }
 
         public void Delete(int id)
         {
             try
             {
-                var farmInDb = _farmRepository.GetById(id);
-                _farmRepository.Delete(farmInDb);
+                var employeeInDb = _employeeRpository.GetById(id);
+                _employeeRpository.Delete(employeeInDb);
             }
             catch (Exception ex)
             {

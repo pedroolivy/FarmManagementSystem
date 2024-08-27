@@ -3,40 +3,39 @@ using FarmManagementSystem.Domain.Interfaces;
 
 namespace FarmManagementSystem.Services.Services
 {
-    public class FarmService(IFarmRepository farmRepository)
+    public class AnimalService(IAnimalRepository animalRepository)
     {
-        private readonly IFarmRepository _farmRepository = farmRepository;
+        private readonly IAnimalRepository _animalRepository = animalRepository;
 
-        public List<Farm> GetAll()
+        public List<Animal> GetAll()
         {
             try
             {
-                return _farmRepository.GetAll();
+                return _animalRepository.GetAll();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-
         }
 
-        public Farm GetById(int Id)
+        public Animal GetById(int Id)
         {
             try
             {
-                return _farmRepository.GetById(Id);
+                return _animalRepository.GetById(Id);
             }
             catch (Exception)
             {
-                throw new Exception("Fazenda não encontrada");
+                throw new Exception("Animal não encontrado");
             }
         }
 
-        public List<Farm> GetByUserId(int userId)
+        public List<Animal> GetByFarmId(int farmId)
         {
             try
             {
-                return _farmRepository.GetByUserId(userId);
+                return _animalRepository.GetByFarmId(farmId);
             }
             catch (Exception ex)
             {
@@ -44,11 +43,11 @@ namespace FarmManagementSystem.Services.Services
             }
         }
 
-        public void Add(Farm user)
+        public void Add(Animal animal)
         {
             try
             {
-                _farmRepository.Add(user);
+                _animalRepository.Add(animal);
             }
             catch (Exception ex)
             {
@@ -56,26 +55,25 @@ namespace FarmManagementSystem.Services.Services
             }
         }
 
-        public void Update(Farm farm)
+        public void Update(Animal animal)
         {
             try
             {
-                var farmInDb = _farmRepository.GetById(farm.Id);
-                _farmRepository.Update(farmInDb, farm);
+                var animalInDb = _animalRepository.GetById(animal.Id);
+                _animalRepository.Update(animalInDb, animal);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-
         }
 
         public void Delete(int id)
         {
             try
             {
-                var farmInDb = _farmRepository.GetById(id);
-                _farmRepository.Delete(farmInDb);
+                var animalInDb = _animalRepository.GetById(id);
+                _animalRepository.Delete(animalInDb);
             }
             catch (Exception ex)
             {

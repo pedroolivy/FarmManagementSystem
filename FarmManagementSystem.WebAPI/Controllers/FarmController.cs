@@ -15,35 +15,42 @@ namespace FarmManagementSystem.WebAPI.Controllers
             _farmService = farmService;
         }
 
-        [HttpGet("users")]
+        [HttpGet("farms")]
         public OkObjectResult GetAll()
         {
-            var users = _farmService.GetAll();
-            return Ok(users);
+            var farms = _farmService.GetAll();
+            return Ok(farms);
         }
 
-        [HttpGet("user/{Id}")]
+        [HttpGet("farm/{Id}")]
         public OkObjectResult GetById(int Id)
         {
-            var user = _farmService.GetById(Id);
-            return Ok(user);
+            var farm = _farmService.GetById(Id);
+            return Ok(farm);
         }
 
-        [HttpPost("user")]
+        [HttpGet("farmByUserId/{Id}")]
+        public OkObjectResult GetByUserId(int Id)
+        {
+            var farms = _farmService.GetByUserId(Id);
+            return Ok(farms);
+        }
+
+        [HttpPost("farm")]
         public CreatedResult Add([FromBody] Farm farm)
         {
             _farmService.Add(farm);
             return Created();
         }
 
-        [HttpPut("userUpdate")]
+        [HttpPut("farmUpdate")]
         public OkResult Update([FromBody] Farm farm)
         {
             _farmService.Update(farm);
             return Ok();
         }
 
-        [HttpDelete("usuario/{id}")]
+        [HttpDelete("farm/{id}")]
         public OkResult Delete(int id)
         {
             _farmService.Delete(id);

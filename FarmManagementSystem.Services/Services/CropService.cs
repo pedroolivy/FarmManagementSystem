@@ -3,40 +3,39 @@ using FarmManagementSystem.Domain.Interfaces;
 
 namespace FarmManagementSystem.Services.Services
 {
-    public class UserService(IUserRepository userRepository)
+    public class CropService(ICropRepository cropRepository)
     {
-        private readonly IUserRepository _userRepository = userRepository;
+        private readonly ICropRepository _cropRepository = cropRepository;
 
-        public List<User> GetAll()
+        public List<Crop> GetAll()
         {
             try
             {
-                return _userRepository.GetAll();
+                return _cropRepository.GetAll();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            
         }
 
-        public User GetById(int Id)
+        public Crop GetById(int Id)
         {
             try
             {
-                return _userRepository.GetById(Id);
+                return _cropRepository.GetById(Id);
             }
             catch (Exception)
             {
-                throw new Exception("Usuário não encontrado");
+                throw new Exception("Cultura não encontrada");
             }
         }
 
-        public void Add(User user)
+        public List<Crop> GetByFarmId(int farmId)
         {
             try
             {
-                _userRepository.Add(user);
+                return _cropRepository.GetByFarmId(farmId);
             }
             catch (Exception ex)
             {
@@ -44,25 +43,37 @@ namespace FarmManagementSystem.Services.Services
             }
         }
 
-        public void Update(User user)
+        public void Add(Crop crop)
         {
             try
             {
-                var userInDb = _userRepository.GetById(user.Id);
-                _userRepository.Update(userInDb, user);
+                _cropRepository.Add(crop);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            
         }
+
+        public void Update(Crop crop)
+        {
+            try
+            {
+                var cropInDb = _cropRepository.GetById(crop.Id);
+                _cropRepository.Update(cropInDb, crop);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void Delete(int id)
         {
             try
             {
-                var userInDb = _userRepository.GetById(id);
-                _userRepository.Delete(userInDb);
+                var cropInDb = _cropRepository.GetById(id);
+                _cropRepository.Delete(cropInDb);
             }
             catch (Exception ex)
             {
