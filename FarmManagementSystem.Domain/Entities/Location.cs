@@ -22,7 +22,10 @@ namespace FarmManagementSystem.Domain.Entities
 
             if (Longitude < MinLongitude || Longitude > MaxLongitude)
                 throw new ValidationException($"A longitude deve estar entre {MinLongitude} e {MaxLongitude} graus.");
+        }
 
+        public void ValideFarmId()
+        {
             if (FarmId <= Empty)
                 throw new ValidationException("Um FarmId válido deve estar associado à localização.");
         }

@@ -1,5 +1,4 @@
-﻿using FarmManagementSystem.Domain.Entities;
-using FarmManagementSystem.Services.Dtos;
+﻿using FarmManagementSystem.Services.Dtos;
 using FarmManagementSystem.Services.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,16 +30,16 @@ namespace FarmManagementSystem.WebAPI.Controllers
         }
 
         [HttpPost("user")]
-        public CreatedResult Add([FromBody] UserDto user)
+        public CreatedResult Add([FromBody] UserDto userDto)
         {
-            _userService.Add(user);
+            _userService.Add(userDto);
             return Created();
         }
 
         [HttpPut("userUpdate")]
-        public OkResult Update([FromBody] User user)
+        public OkResult Update([FromBody] UserDto userDto)
         {
-            _userService.Update(user);
+            _userService.Update(userDto);
             return Ok();
         }
 

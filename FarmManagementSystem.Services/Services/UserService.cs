@@ -37,7 +37,7 @@ namespace FarmManagementSystem.Services.Services
         {
             try
             {
-                var usuario = new User
+                var user = new User
                 {
                     Id = userDto.Id,
                     UserName = userDto.UserName,
@@ -46,8 +46,8 @@ namespace FarmManagementSystem.Services.Services
                     Position = userDto.Position
                 };
 
-                usuario.Validate();
-                _userRepository.Add(usuario);
+                user.Validate();
+                _userRepository.Add(user);
             }
             catch (Exception ex)
             {
@@ -55,11 +55,21 @@ namespace FarmManagementSystem.Services.Services
             }
         }
 
-        public void Update(User user)
+        public void Update(UserDto userDto)
         {
             try
             {
-                var userInDb = _userRepository.GetById(user.Id);
+                var userInDb = _userRepository.GetById(userDto.Id);
+                var user = new User
+                {
+                    Id = userDto.Id,
+                    UserName = userDto.UserName,
+                    Email = userDto.Email,
+                    PassWord = userDto.PassWord,
+                    Position = userDto.Position
+                };
+
+                user.Validate();
                 _userRepository.Update(userInDb, user);
             }
             catch (Exception ex)

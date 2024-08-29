@@ -11,6 +11,7 @@ namespace FarmManagementSystem.Domain.Entities
         public string Name { get; set; }
         public string Type { get; set; }
         public double Area { get; set; }
+        public DateTime DateAdd { get; set; }
         public CropStatus CropStatus { get; set; }
         public int FarmId { get; set; }
 

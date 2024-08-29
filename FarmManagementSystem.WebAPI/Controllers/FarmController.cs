@@ -1,4 +1,4 @@
-﻿using FarmManagementSystem.Domain.Entities;
+﻿using FarmManagementSystem.Services.Dtos;
 using FarmManagementSystem.Services.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,16 +37,16 @@ namespace FarmManagementSystem.WebAPI.Controllers
         }
 
         [HttpPost("farm")]
-        public CreatedResult Add([FromBody] Farm farm)
+        public CreatedResult Add([FromBody] FarmDto farmDto)
         {
-            _farmService.Add(farm);
+            _farmService.Add(farmDto);
             return Created();
         }
 
         [HttpPut("farmUpdate")]
-        public OkResult Update([FromBody] Farm farm)
+        public OkResult Update([FromBody] FarmDto farmDto)
         {
-            _farmService.Update(farm);
+            _farmService.Update(farmDto);
             return Ok();
         }
 
