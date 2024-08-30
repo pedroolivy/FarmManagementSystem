@@ -6,9 +6,7 @@ namespace FarmManagementSystem.Domain.Interfaces
     {
         List<Location> GetAll();
         Location GetById(int Id);
-        List<Location> GetByFarmId(int farmId);
-        void Add(Location location);
+        Location GetByFarmId(int farmId);
         void Update(Location locationInDb, Location location);
-        void Delete(Location location);
     }
 }

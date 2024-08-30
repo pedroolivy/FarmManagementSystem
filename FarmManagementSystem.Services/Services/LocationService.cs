@@ -1,5 +1,7 @@
 ﻿using FarmManagementSystem.Domain.Entities;
 using FarmManagementSystem.Domain.Interfaces;
+using FarmManagementSystem.Services.Dtos;
+using System.ComponentModel.DataAnnotations;
 
 namespace FarmManagementSystem.Services.Services
 {
@@ -27,7 +29,12 @@ namespace FarmManagementSystem.Services.Services
         {
             try
             {
-                return _locationRepository.GetById(Id);
+                var location = _locationRepository.GetById(Id);
+
+                if (location == null)
+                    throw new ValidationException("Localização não encontrada.");
+
+                return location;
             }
             catch (Exception)
             {
@@ -35,11 +42,16 @@ namespace FarmManagementSystem.Services.Services
             }
         }
 
-        public List<Location> GetByFarmId(int faramId)
+        public Location GetByFarmId(int faramId)
         {
             try
             {
-                return _locationRepository.GetByFarmId(faramId);
+                var location = _locationRepository.GetByFarmId(faramId);
+
+                if (location == null)
+                    throw new ValidationException("Localização não encontrada.");
+
+                return location;
             }
             catch (Exception ex)
             {
@@ -47,23 +59,17 @@ namespace FarmManagementSystem.Services.Services
             }
         }
 
-        public void Add(Location location)
+        public void Update(LocationDto locationDto)
         {
             try
             {
-                _locationRepository.Add(location);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public void Update(Location location)
-        {
-            try
-            {
+                var location = ProcessingUpdatefields(locationDto);
                 var locationInDb = _locationRepository.GetById(location.Id);
+
+                if (locationInDb == null)
+                    throw new ValidationException("Localização não encontrada.");
+
+                location.FarmId = locationInDb.FarmId;
                 _locationRepository.Update(locationInDb, location);
             }
             catch (Exception ex)
@@ -72,17 +78,20 @@ namespace FarmManagementSystem.Services.Services
             }
         }
 
-        public void Delete(int id)
+        #region processingFields
+        private static Location ProcessingUpdatefields(LocationDto locationDto)
         {
-            try
+            var location = new Location
             {
-                var locationInDb = _locationRepository.GetById(id);
-                _locationRepository.Delete(locationInDb);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+                Id = locationDto.Id,
+                Latitude = locationDto.Latitude,
+                Longitude = locationDto.Longitude
+            };
+
+            location.Validate();
+
+            return location;
         }
+        #endregion
     }
 }

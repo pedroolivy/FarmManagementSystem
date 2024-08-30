@@ -21,27 +21,18 @@ namespace FarmManagementSystem.Infra.Repositorios
             return _appDbContext.Location.FirstOrDefault(x => x.Id == Id);
         }
 
-        public List<Location> GetByFarmId(int farmId)
+        public Location GetByFarmId(int farmId)
         {
-            return _appDbContext.Location.Where(x => x.FarmId == farmId).ToList();
+            return _appDbContext.Location.FirstOrDefault(x => x.FarmId == farmId);
         }
 
-        public void Add(Location location)
-        {
-            _appDbContext.Add(location);
-            _appDbContext.SaveChanges();
-        }
         public void Update(Location locationInDb, Location location)
         {
             _appDbContext
                 .Attach(locationInDb)
                 .CurrentValues
                 .SetValues(location);
-        }
 
-        public void Delete(Location location)
-        {
-            _appDbContext.Remove(location);
             _appDbContext.SaveChanges();
         }
     }

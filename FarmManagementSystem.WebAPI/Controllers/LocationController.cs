@@ -1,4 +1,5 @@
 ﻿using FarmManagementSystem.Domain.Entities;
+using FarmManagementSystem.Services.Dtos;
 using FarmManagementSystem.Services.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,24 +37,10 @@ namespace FarmManagementSystem.WebAPI.Controllers
             return Ok(locations);
         }
 
-        [HttpPost("location")]
-        public CreatedResult Add([FromBody] Location location)
-        {
-            _locationService.Add(location);
-            return Created();
-        }
-
         [HttpPut("locationUpdate")]
-        public OkResult Update([FromBody] Location location)
+        public OkResult Update([FromBody] LocationDto locationDto)
         {
-            _locationService.Update(location);
-            return Ok();
-        }
-
-        [HttpDelete("location/{id}")]
-        public OkResult Delete(int id)
-        {
-            _locationService.Delete(id);
+            _locationService.Update(locationDto);
             return Ok();
         }
     }

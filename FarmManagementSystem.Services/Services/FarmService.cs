@@ -1,6 +1,5 @@
 ﻿using FarmManagementSystem.Domain.Entities;
 using FarmManagementSystem.Domain.Interfaces;
-using FarmManagementSystem.Infra.Repositorios;
 using FarmManagementSystem.Services.Dtos;
 using System.ComponentModel.DataAnnotations;
 
@@ -27,7 +26,12 @@ namespace FarmManagementSystem.Services.Services
         {
             try
             {
-                return _farmRepository.GetById(Id);
+                var farm = _farmRepository.GetById(Id);
+
+                if (farm == null)
+                    throw new ValidationException("Não existem registros dessa fazenda em nosso sistemma.");
+
+                return farm;
             }
             catch (Exception)
             {
@@ -68,6 +72,9 @@ namespace FarmManagementSystem.Services.Services
                 var farm = ProcessingUpdatefields(FarmDto);
                 var farmInDb = _farmRepository.GetById(farm.Id);
 
+                if (farmInDb != null)
+                    throw new ValidationException("Não existem registros dessa fazenda em nosso sistemma.");
+
                 if (farmInDb.UserId != farm.UserId)
                     throw new ValidationException("Usuário sem acesso para alterações nessa fazenda.");
 
@@ -88,6 +95,9 @@ namespace FarmManagementSystem.Services.Services
             {
                 var farmInDb = _farmRepository.GetById(id);
                 var farmLocationInDb = _locationRepository.GetById(farmInDb.Id);
+
+                if (farmInDb == null && farmLocationInDb == null)
+                    throw new ValidationException("Não existem registros dessa fazenda em nosso sistemma.");
 
                 if (farmInDb.IsFarmActive())
                     throw new ValidationException("Apenas fazenda desativadas podem ser excluidas.");
