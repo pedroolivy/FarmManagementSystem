@@ -21,7 +21,6 @@ namespace FarmManagementSystem.Services.Services
             {
                 throw new Exception(ex.Message);
             }
-
         }
 
         public Farm GetById(int Id)
@@ -89,11 +88,11 @@ namespace FarmManagementSystem.Services.Services
             {
                 var farmInDb = _farmRepository.GetById(id);
                 var farmLocationInDb = _locationRepository.GetById(farmInDb.Id);
-                //Processar a exclusão da localização...........................
 
                 if (farmInDb.IsFarmActive())
                     throw new ValidationException("Apenas fazenda desativadas podem ser excluidas.");
 
+                farmInDb.Location = farmLocationInDb;
                 _farmRepository.Delete(farmInDb);
             }
             catch (Exception ex)
