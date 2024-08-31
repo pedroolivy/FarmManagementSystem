@@ -50,12 +50,12 @@ namespace FarmManagementSystem.Services.Services
             }
         }
 
-        public void Add(Employee Employee)
+        public void Add(Employee employee)
         {
             try
             {
-                Employee.Validate();
-                _employeeRpository.Add(Employee);
+                employee.Validate();
+                _employeeRpository.Add(employee);
             }
             catch (Exception ex)
             {
@@ -67,6 +67,7 @@ namespace FarmManagementSystem.Services.Services
         {
             try
             {
+                employee.Validate();
                 employee.ValidateId();
                 var employeeInDb = _employeeRpository.GetById(employee.Id);
 

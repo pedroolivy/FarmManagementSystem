@@ -8,9 +8,11 @@ namespace FarmManagementSystem.Services.Services
     public class LocationService
     {
         private readonly ILocationRepository _locationRepository;
-        public LocationService(ILocationRepository locationRepository) 
+        private readonly IFarmRepository _farmRepository;
+        public LocationService(ILocationRepository locationRepository, IFarmRepository farmRepository) 
         {
             _locationRepository = locationRepository;
+            _farmRepository = farmRepository;
         }
 
         public List<Location> GetAll()
@@ -70,6 +72,13 @@ namespace FarmManagementSystem.Services.Services
                     throw new ValidationException("Localização não encontrada.");
 
                 location.FarmId = locationInDb.FarmId;
+                location.ValideFarmId();
+
+                var farm = _farmRepository.GetById(location.FarmId);
+
+                if (!farm.IsFarmActive())
+                    throw new ValidationException("A fazenda com essa localização está inativa");
+
                 _locationRepository.Update(locationInDb, location);
             }
             catch (Exception ex)
@@ -77,7 +86,7 @@ namespace FarmManagementSystem.Services.Services
                 throw new Exception(ex.Message);
             }
         }
-
+         
         #region processingFields
         private static Location ProcessingUpdatefields(LocationDto locationDto)
         {
@@ -89,7 +98,7 @@ namespace FarmManagementSystem.Services.Services
             };
 
             location.Validate();
-
+            
             return location;
         }
         #endregion

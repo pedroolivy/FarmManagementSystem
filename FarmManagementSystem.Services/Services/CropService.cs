@@ -67,7 +67,9 @@ namespace FarmManagementSystem.Services.Services
         {
             try
             {
+                crop.Validate();
                 crop.ValidateId();
+
                 var cropInDb = _cropRepository.GetById(crop.Id);
 
                 if (cropInDb == null)

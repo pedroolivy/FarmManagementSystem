@@ -6,7 +6,7 @@ namespace FarmManagementSystem.Domain.Interfaces.IRepositories
     {
         List<Animal> GetAll();
         Animal GetById(int id);
-        List<Animal> GetByFarmId(int farmId);
+        Animal GetByFarmId(int farmId);
         void Add(Animal animal);
         void Update(Animal animalInDb, Animal animal);
         void Delete(Animal animal);

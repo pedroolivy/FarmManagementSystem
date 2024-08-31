@@ -33,9 +33,9 @@ namespace FarmManagementSystem.Services.Services
 
                 return farm;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Fazenda não encontrada");
+                throw new Exception(ex.Message);
             }
         }
 
