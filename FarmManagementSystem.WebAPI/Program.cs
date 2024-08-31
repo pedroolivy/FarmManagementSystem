@@ -1,4 +1,4 @@
-using FarmManagementSystem.Domain.Interfaces;
+using FarmManagementSystem.Domain.Interfaces.IRepositories;
 using FarmManagementSystem.Infra.Data;
 using FarmManagementSystem.Infra.Repositorios;
 using FarmManagementSystem.Services.Services;

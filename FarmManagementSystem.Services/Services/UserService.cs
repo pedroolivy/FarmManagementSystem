@@ -1,5 +1,5 @@
 ﻿using FarmManagementSystem.Domain.Entities;
-using FarmManagementSystem.Domain.Interfaces;
+using FarmManagementSystem.Domain.Interfaces.IRepositories;
 using FarmManagementSystem.Services.Dtos;
 
 namespace FarmManagementSystem.Services.Services

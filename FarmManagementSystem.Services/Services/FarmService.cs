@@ -1,5 +1,5 @@
 ﻿using FarmManagementSystem.Domain.Entities;
-using FarmManagementSystem.Domain.Interfaces;
+using FarmManagementSystem.Domain.Interfaces.IRepositories;
 using FarmManagementSystem.Services.Dtos;
 using System.ComponentModel.DataAnnotations;
 
@@ -74,9 +74,6 @@ namespace FarmManagementSystem.Services.Services
 
                 if (farmInDb != null)
                     throw new ValidationException("Não existem registros dessa fazenda em nosso sistemma.");
-
-                if (farmInDb.UserId != farm.UserId)
-                    throw new ValidationException("Usuário sem acesso para alterações nessa fazenda.");
 
                 if (!farmInDb.IsFarmActive())
                     throw new ValidationException("Apenas fazendas ativas podem sofrar modificações.");

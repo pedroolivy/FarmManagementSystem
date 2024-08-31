@@ -1,5 +1,5 @@
 ﻿using FarmManagementSystem.Domain.Entities;
-using FarmManagementSystem.Domain.Interfaces;
+using FarmManagementSystem.Domain.Interfaces.IRepositories;
 using FarmManagementSystem.Infra.Data;
 
 namespace FarmManagementSystem.Infra.Repositorios

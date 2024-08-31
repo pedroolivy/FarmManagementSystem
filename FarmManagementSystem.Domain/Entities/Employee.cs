@@ -16,12 +16,20 @@ namespace FarmManagementSystem.Domain.Entities
 
         public void Validate()
         {
+            if (FarmId == Empty || FarmId == null)
+                throw new ValidationException("O Id da fazenda deve ser informado.");
+
             if (string.IsNullOrWhiteSpace(Name))
-                throw new ValidationException("O nome do empregado é obrigatório.");
+                throw new ValidationException("O nome do colaborador é obrigatório.");
 
             if (Salary < Empty)
                 throw new ValidationException("O salário deve ser maior que zero.");
+        }
 
+        public void ValidateId()
+        {
+            if (Id <= Empty)
+                throw new ValidationException("Id do colaborador não encontrado!");
         }
     }
 }

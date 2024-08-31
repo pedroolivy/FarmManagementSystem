@@ -1,6 +1,6 @@
 ﻿using FarmManagementSystem.Domain.Entities;
 
-namespace FarmManagementSystem.Domain.Interfaces
+namespace FarmManagementSystem.Domain.Interfaces.IRepositories
 {
     public interface IFarmRepository
     {

@@ -1,5 +1,5 @@
 ﻿using FarmManagementSystem.Domain.Entities;
-using FarmManagementSystem.Domain.Interfaces;
+using FarmManagementSystem.Domain.Interfaces.IRepositories;
 using FarmManagementSystem.Infra.Data;
 
 namespace FarmManagementSystem.Infra.Repositorios
@@ -37,6 +37,8 @@ namespace FarmManagementSystem.Infra.Repositorios
                 .Attach(employeeInDb)
                 .CurrentValues
                 .SetValues(employee);
+
+            _appDbContext.SaveChanges();
         }
 
         public void Delete(Employee employeeInDb)

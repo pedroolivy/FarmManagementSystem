@@ -1,11 +1,13 @@
 ﻿using FarmManagementSystem.Domain.Entities;
-using FarmManagementSystem.Domain.Interfaces;
+using FarmManagementSystem.Domain.Interfaces.IRepositories;
+using System.ComponentModel.DataAnnotations;
 
 namespace FarmManagementSystem.Services.Services
 {
-    public class EmployeeService(IEmployeeRpository employeeRpository)
+    public class EmployeeService(IEmployeeRpository employeeRpository, IFarmRepository farmRepository)
     {
         private readonly IEmployeeRpository _employeeRpository = employeeRpository;
+        private readonly IFarmRepository _farmRepository = farmRepository;
 
         public List<Employee> GetAll()
         {
@@ -17,18 +19,22 @@ namespace FarmManagementSystem.Services.Services
             {
                 throw new Exception(ex.Message);
             }
-
         }
 
         public Employee GetById(int Id)
         {
             try
             {
-                return _employeeRpository.GetById(Id);
+                var employee = _employeeRpository.GetById(Id);
+
+                if (employee == null)
+                    throw new ValidationException("Não existem registros desse colaborador em nosso sistemma.");
+
+                return employee;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Funcionário não encontrado");
+                throw new Exception(ex.Message);
             }
         }
 
@@ -48,6 +54,7 @@ namespace FarmManagementSystem.Services.Services
         {
             try
             {
+                Employee.Validate();
                 _employeeRpository.Add(Employee);
             }
             catch (Exception ex)
@@ -61,6 +68,15 @@ namespace FarmManagementSystem.Services.Services
             try
             {
                 var employeeInDb = _employeeRpository.GetById(employee.Id);
+
+                if (employeeInDb == null)
+                    throw new ValidationException("Não existem registros desse colaborador em nosso sistemma.");
+
+                var farm = _farmRepository.GetById(employeeInDb.FarmId);
+
+                if(!farm.IsFarmActive())
+                    throw new ValidationException("A fazenda desse colaborador está inativa");
+
                 _employeeRpository.Update(employeeInDb, employee);
             }
             catch (Exception ex)
@@ -74,6 +90,15 @@ namespace FarmManagementSystem.Services.Services
             try
             {
                 var employeeInDb = _employeeRpository.GetById(id);
+
+                if (employeeInDb == null)
+                    throw new ValidationException("Colaborador não encontrado.");
+
+                var farm = _farmRepository.GetById(employeeInDb.FarmId);
+
+                if (!farm.IsFarmActive())
+                    throw new ValidationException("A fazenda desse colaborador está inativa");
+
                 _employeeRpository.Delete(employeeInDb);
             }
             catch (Exception ex)
