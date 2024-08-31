@@ -1,6 +1,6 @@
 ﻿using FarmManagementSystem.Domain.Entities;
 
-namespace FarmManagementSystem.Domain.Interfaces.IRepositories
+namespace FarmManagementSystem.Domain.Interfaces
 {
     public interface ICropRepository
     {

@@ -1,5 +1,5 @@
 ﻿using FarmManagementSystem.Domain.Entities;
-using FarmManagementSystem.Domain.Interfaces.IRepositories;
+using FarmManagementSystem.Domain.Interfaces;
 using System.ComponentModel.DataAnnotations;
 
 namespace FarmManagementSystem.Services.Services

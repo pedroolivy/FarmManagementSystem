@@ -1,5 +1,5 @@
 ﻿using FarmManagementSystem.Domain.Entities;
-using FarmManagementSystem.Domain.Interfaces.IRepositories;
+using FarmManagementSystem.Domain.Interfaces;
 using FarmManagementSystem.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 

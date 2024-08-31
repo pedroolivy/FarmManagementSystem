@@ -15,8 +15,8 @@ namespace FarmManagementSystem.Domain.Entities
 
         public void Validate()
         {
-            if (string.IsNullOrWhiteSpace(UserName))
-                throw new ValidationException("O nome de usuário é obrigatório.");
+            if (string.IsNullOrWhiteSpace(UserName) || UserName.Length > 50)
+                throw new ValidationException("O nome de usuário deve ter no mínimo 50 caracteres.");
 
             if (string.IsNullOrWhiteSpace(Email) || !Email.Contains("@"))
                 throw new ValidationException("O e-mail deve estar em um formato válido.");

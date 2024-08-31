@@ -17,7 +17,6 @@ namespace FarmManagementSystem.Domain.Entities
 
         public void Validate()
         {
-
             if (Latitude < MinLatitude || Latitude > MaxLatitude)
                 throw new ValidationException($"A latitude deve estar entre {MinLatitude} e {MaxLatitude} graus.");
 
