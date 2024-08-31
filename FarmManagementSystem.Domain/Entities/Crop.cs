@@ -17,12 +17,23 @@ namespace FarmManagementSystem.Domain.Entities
 
         public void Validate()
         {
+            if (FarmId == Empty || FarmId == null)
+                throw new ValidationException("O Id da fazenda deve ser informado.");
+
             if (string.IsNullOrWhiteSpace(Name))
                 throw new ValidationException("O nome da cultura é obrigatório.");
 
             if (Area < Empty)
                 throw new ValidationException("A área deve ser maior que zero.");
 
+            if (DateAdd <= DateTime.Now)
+                throw new ValidationException("A data não pode ser menor que a data atual.");
+        }
+
+        public void ValidateId()
+        {
+            if (Id <= Empty)
+                throw new ValidationException("Id da cultura não encontrado!");
         }
     }
 }

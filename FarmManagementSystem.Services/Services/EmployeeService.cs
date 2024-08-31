@@ -67,6 +67,7 @@ namespace FarmManagementSystem.Services.Services
         {
             try
             {
+                employee.ValidateId();
                 var employeeInDb = _employeeRpository.GetById(employee.Id);
 
                 if (employeeInDb == null)

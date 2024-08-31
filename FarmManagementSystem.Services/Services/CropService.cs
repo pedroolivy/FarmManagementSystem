@@ -1,11 +1,13 @@
 ﻿using FarmManagementSystem.Domain.Entities;
 using FarmManagementSystem.Domain.Interfaces.IRepositories;
+using System.ComponentModel.DataAnnotations;
 
 namespace FarmManagementSystem.Services.Services
 {
-    public class CropService(ICropRepository cropRepository)
+    public class CropService(ICropRepository cropRepository, IFarmRepository farmRepository)
     {
         private readonly ICropRepository _cropRepository = cropRepository;
+        private readonly IFarmRepository _farmRepository = farmRepository;
 
         public List<Crop> GetAll()
         {
@@ -23,11 +25,16 @@ namespace FarmManagementSystem.Services.Services
         {
             try
             {
-                return _cropRepository.GetById(Id);
+                var crop = _cropRepository.GetById(Id);
+
+                if(crop == null)
+                    throw new ValidationException("Não existem registros dessa cultura em nosso sistemma.");
+
+                return crop;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Cultura não encontrada");
+                throw new Exception(ex.Message);
             }
         }
 
@@ -47,6 +54,7 @@ namespace FarmManagementSystem.Services.Services
         {
             try
             {
+                crop.Validate();
                 _cropRepository.Add(crop);
             }
             catch (Exception ex)
@@ -59,7 +67,17 @@ namespace FarmManagementSystem.Services.Services
         {
             try
             {
+                crop.ValidateId();
                 var cropInDb = _cropRepository.GetById(crop.Id);
+
+                if (cropInDb == null)
+                    throw new ValidationException("Não existem registros dessa cultura em nosso sistemma.");
+
+                var farm = _farmRepository.GetById(cropInDb.FarmId);
+
+                if (!farm.IsFarmActive())
+                    throw new ValidationException("A fazenda que contem essa cultura está inativa.");
+
                 _cropRepository.Update(cropInDb, crop);
             }
             catch (Exception ex)
@@ -73,6 +91,15 @@ namespace FarmManagementSystem.Services.Services
             try
             {
                 var cropInDb = _cropRepository.GetById(id);
+
+                if (cropInDb == null)
+                    throw new ValidationException("Não existem registros dessa cultura em nosso sistemma.");
+
+                var farm = _farmRepository.GetById(cropInDb.FarmId);
+
+                if (!farm.IsFarmActive())
+                    throw new ValidationException("A fazenda que contem essa cultura está inativa.");
+
                 _cropRepository.Delete(cropInDb);
             }
             catch (Exception ex)

@@ -39,6 +39,8 @@ namespace FarmManagementSystem.Infra.Repositorios
                 .Attach(cropInDb)
                 .CurrentValues
                 .SetValues(crop);
+
+            _appDbContext.SaveChanges();
         }
 
         public void Delete(Crop crop)
