@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FarmManagementSystem.Domain
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FarmManagementSystem.Infra", "FarmManagementSystem.Infra\FarmManagementSystem.Infra.csproj", "{AD4DFFB7-291A-4ECD-AA79-DA1AB009A120}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmManagementSystem.Services", "FarmManagementSystem.Services\FarmManagementSystem.Services.csproj", "{EE1EE72C-B009-4B63-84E8-20CE293AB7E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FarmManagementSystem.Services", "FarmManagementSystem.Services\FarmManagementSystem.Services.csproj", "{EE1EE72C-B009-4B63-84E8-20CE293AB7E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmManagementSystem.Tests", "FarmManagementSystem.Tests\FarmManagementSystem.Tests.csproj", "{335F2C1C-E862-4FB9-8E5D-4DD978FD37FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{EE1EE72C-B009-4B63-84E8-20CE293AB7E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE1EE72C-B009-4B63-84E8-20CE293AB7E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE1EE72C-B009-4B63-84E8-20CE293AB7E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{335F2C1C-E862-4FB9-8E5D-4DD978FD37FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{335F2C1C-E862-4FB9-8E5D-4DD978FD37FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{335F2C1C-E862-4FB9-8E5D-4DD978FD37FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{335F2C1C-E862-4FB9-8E5D-4DD978FD37FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
