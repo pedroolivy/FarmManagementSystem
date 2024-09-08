@@ -72,7 +72,7 @@ namespace FarmManagementSystem.Services.Services
                 var farm = ProcessingUpdatefields(FarmDto);
                 var farmInDb = _farmRepository.GetById(farm.Id);
 
-                if (farmInDb != null)
+                if (farmInDb == null)
                     throw new ValidationException("Não existem registros dessa fazenda em nosso sistemma.");
 
                 if (!farmInDb.IsFarmActive())
